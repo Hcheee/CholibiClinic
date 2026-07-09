@@ -22,6 +22,10 @@ namespace CholibiClinic
 
         private void LoadDoctors()
         {
+            if (ViewState["CurrentLimit"] == null)
+            {
+                ViewState["CurrentLimit"] = pageSize;
+            }
             int limit = (int)ViewState["CurrentLimit"];
             string connString = ConfigurationManager.ConnectionStrings["ClinicDB"].ConnectionString;
 
@@ -72,6 +76,10 @@ namespace CholibiClinic
         // Xử lý sự kiện khi bấm nút "Tải thêm 20 bác sĩ"
         protected void btnLoadMore_Click(object sender, EventArgs e)
         {
+            if (ViewState["CurrentLimit"] == null)
+            {
+                ViewState["CurrentLimit"] = pageSize;
+            }
             // Tăng số lượng giới hạn lên thêm 20
             int currentLimit = (int)ViewState["CurrentLimit"];
             ViewState["CurrentLimit"] = currentLimit + pageSize;
