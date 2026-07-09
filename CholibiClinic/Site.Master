@@ -50,9 +50,15 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/LichKham.aspx">Lịch Khám</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/TinTuc.aspx">Tin tức</a></li>
                     </ul>
-                    <div class="d-flex">
-                        <a href="~/DangNhap" runat="server" class="btn-login">Đăng nhập</a>
-                        <a href="~/DangKy" runat="server" class="btn-register">Đăng ký</a>
+                    <div class="d-flex align-items-center">
+                        <asp:PlaceHolder ID="plhAnonymous" runat="server">
+                            <a href="~/DangNhap" runat="server" class="btn-login">Đăng nhập</a>
+                            <a href="~/DangKy" runat="server" class="btn-register">Đăng ký</a>
+                        </asp:PlaceHolder>
+                        <asp:PlaceHolder ID="plhLoggedIn" runat="server" Visible="false">
+                            <span class="user-greeting me-3">👋 Xin chào, <strong class="text-primary"><asp:Label ID="lblUserFullName" runat="server"></asp:Label></strong></span>
+                            <asp:LinkButton ID="lnkLogout" runat="server" CssClass="btn-logout-link" OnClick="lnkLogout_Click" CausesValidation="false">Đăng xuất ➔</asp:LinkButton>
+                        </asp:PlaceHolder>
                     </div>
                 </div>
             </nav>

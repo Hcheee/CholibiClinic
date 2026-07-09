@@ -527,3 +527,415 @@ body {
     color: #0b5ed7;
     text-decoration: none;
 }
+
+/* ==========================================================================
+   PATIENT BOOKING & HISTORY & AUTHENTICATION STYLES (NEW)
+   ========================================================================== */
+
+/* 1. AUTHENTICATION (LOGIN / REGISTER) */
+.auth-container {
+    padding: 60px 0;
+    min-height: calc(100vh - 350px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #f0f8ff 0%, #f8f9fa 100%);
+}
+
+.auth-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 40px;
+    width: 100%;
+    max-width: 480px;
+    transition: transform 0.3s ease;
+}
+
+.auth-card.max-w-600 {
+    max-width: 680px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-icon {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.auth-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 8px;
+}
+
+.auth-subtitle {
+    font-size: 14px;
+    color: #718096;
+    line-height: 1.5;
+}
+
+.input-icon-group {
+    position: relative;
+}
+
+.input-icon-group .input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #a0aec0;
+}
+
+.input-icon-group .form-control {
+    padding-left: 45px;
+}
+
+.form-control, .form-select {
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+
+.btn-auth-submit {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    color: white;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(13, 110, 253, 0.15);
+}
+
+.btn-auth-submit:hover {
+    background: linear-gradient(135deg, #0b5ed7, #0a58ca);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(13, 110, 253, 0.25);
+}
+
+.auth-link {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+    color: #0a58ca;
+}
+
+/* 2. BOOKING PAGE (DAT LICH) */
+.booking-container {
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #eff6ff 0%, #f8f9fa 100%);
+}
+
+.booking-card {
+    background: #ffffff;
+    border: 1px solid #dbeafe;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(13, 110, 253, 0.05);
+    padding: 40px;
+    width: 100%;
+    max-width: 650px;
+}
+
+.booking-header {
+    text-align: center;
+    margin-bottom: 35px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 20px;
+}
+
+.booking-icon {
+    font-size: 45px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.booking-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #1e3a8a;
+    margin-bottom: 8px;
+}
+
+.booking-subtitle {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.patient-banner {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.patient-avatar {
+    font-size: 28px;
+    background-color: #dcfce7;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.patient-label {
+    font-size: 12px;
+    color: #166534;
+    font-weight: 500;
+}
+
+.patient-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #14532d;
+}
+
+.btn-booking-submit {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.15);
+    margin-top: 15px;
+}
+
+.btn-booking-submit:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(16, 185, 129, 0.25);
+}
+
+/* 3. APPOINTMENT HISTORY (LICH KHAM) */
+.appt-history-container {
+    background-color: #f8fafc;
+    min-height: calc(100vh - 350px);
+}
+
+.history-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 5px;
+}
+
+.btn-book-more-appt {
+    background-color: #0d6efd;
+    color: white;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-book-more-appt:hover {
+    background-color: #0b5ed7;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.no-appt-card {
+    background: white;
+    border: 1px dashed #cbd5e1;
+    border-radius: 16px;
+    padding: 60px 40px;
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.no-appt-icon {
+    font-size: 60px;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.btn-book-now-empty {
+    background-color: #0d6efd;
+    color: white;
+    font-weight: bold;
+    padding: 12px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+.btn-book-now-empty:hover {
+    background-color: #0b5ed7;
+    color: white;
+    text-decoration: none;
+}
+
+/* Thẻ lịch hẹn */
+.appt-card {
+    background: white;
+    border-radius: 16px;
+    border-left: 6px solid #94a3b8;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    padding: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+}
+
+.appt-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+}
+
+.appt-card.border-pending { border-left-color: #f59e0b; }
+.appt-card.border-completed { border-left-color: #10b981; }
+.appt-card.border-cancelled { border-left-color: #ef4444; }
+
+.doc-brief-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 2px solid #f1f5f9;
+}
+
+.doc-brief-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.doc-brief-spec {
+    font-size: 13px;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.appt-status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-pending { background-color: #fef3c7; color: #d97706; }
+.status-completed { background-color: #d1fae5; color: #059669; }
+.status-cancelled { background-color: #fee2e2; color: #dc2626; }
+
+.appt-card-body {
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 15px 0;
+    margin: 15px 0;
+}
+
+.appt-detail-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #475569;
+}
+
+.appt-detail-row:last-child {
+    margin-bottom: 0;
+}
+
+.detail-icon {
+    font-size: 16px;
+    width: 20px;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: #64748b;
+    min-width: 90px;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.appt-card-footer {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.btn-cancel-appt {
+    color: #ef4444;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btn-cancel-appt:hover {
+    color: #b91c1c;
+    text-decoration: underline;
+}
+
+/* 4. LOGOUT & USER AREA IN MASTER PAGE */
+.user-greeting {
+    font-size: 14px;
+    color: #334155;
+}
+
+.btn-logout-link {
+    color: #64748b;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    transition: all 0.2s ease;
+}
+
+.btn-logout-link:hover {
+    background-color: #f1f5f9;
+    color: #334155;
+    text-decoration: none;
+}
+

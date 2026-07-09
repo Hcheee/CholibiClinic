@@ -10,7 +10,7 @@
                     <div class="tag-badge">✓ Hơn 5.000 bác sĩ đã xác minh</div>
                     <h1 class="hero-title">Đặt lịch khám <span>nhanh chóng</span>, tiện lợi</h1>
                     <p class="hero-desc">Kết nối với hàng nghìn bác sĩ chuyên khoa hàng đầu.<br />Đặt lịch trực tuyến, nhận xác nhận ngay lập tức.</p>
-                    <a href="#" class="btn-book-now">📅 Đặt lịch khám ngay</a>
+                    <a href="~/DatLich" runat="server" class="btn-book-now">📅 Đặt lịch khám ngay</a>
                 </div>
                 <div class="col-md-5 hero-img-box">
                     <img src="https://images.unsplash.com/photo-1576091160550-2173ff9e5eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bác sĩ" class="hero-img" />
