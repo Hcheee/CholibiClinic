@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danh sách bác sĩ - Cholibi Clinic</title>
+    
+    <!-- Link file Bootstrap có sẵn trong thư mục Content của bạn -->
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    
+    <!-- Link file CSS tùy chỉnh của bạn -->
+    <link href="Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- HEADER & NAVBAR -->
+    <header class="cholibi-header sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light container py-3">
+            <a class="navbar-brand cholibi-logo" href="index.html">
+                <span>+</span> Cholibi Clinic
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="danh-sach-bac-si.html" style="color: #0d6efd !important;">Bác sĩ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Lịch Khám</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Tin tức</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="btn-login">Đăng nhập</a>
+                    <a href="#" class="btn-register">Đăng ký</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="doc-page-header">
+            <div class="container">
+                <div class="doc-breadcrumb">
+                    <a href="index.html">← Về trang chủ</a><br><br>
+                    <span style="color: #0d6efd; font-weight: bold;">HỆ THỐNG</span>
+                </div>
+                <h1 class="doc-page-title">Danh sách bác sĩ</h1>
+                <div class="doc-page-count">8 bác sĩ trong hệ thống</div>
+
+                <div class="row g-4">
+                    <!-- Bác sĩ 1 -->
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="doc-card">
+                            <div class="doc-img-wrap">
+                                <span class="doc-badge badge-blue">Nổi bật</span>
+                                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=500&q=80" alt="Bác sĩ">
+                            </div>
+                            <div class="doc-info">
+                                <div class="doc-name">PGS. TS. Nguyễn Minh Tuấn</div>
+                                <div class="doc-specialty">Tim mạch</div>
+                                <div class="doc-experience">BV Bạch Mai - 20 năm kinh nghiệm</div>
+                                <div class="doc-desc">Chuyên gia hàng đầu về tim mạch can thiệp, từng tu nghiệp tại Pháp và Nhật Bản.</div>
+                                <div class="doc-rating">
+                                    ★★★★★ <span>4.9</span> <small>(348 đánh giá)</small>
+                                </div>
+                                <div class="doc-footer-info">
+                                    <div class="doc-footer-col">
+                                        <div class="doc-footer-label">Phí khám từ</div>
+                                        <div class="doc-footer-value text-blue">300.000đ</div>
+                                    </div>
+                                    <div class="doc-footer-col text-end">
+                                        <div class="doc-footer-label">Lịch trống</div>
+                                        <div class="doc-footer-value text-teal">Hôm nay</div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn-book">📅 Đặt lịch khám</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bác sĩ 2 -->
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="doc-card">
+                            <div class="doc-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1594824432258-29367a7322ab?auto=format&fit=crop&w=500&q=80" alt="Bác sĩ">
+                            </div>
+                            <div class="doc-info">
+                                <div class="doc-name">TS. BS. Trần Thị Lan Anh</div>
+                                <div class="doc-specialty">Sản phụ khoa</div>
+                                <div class="doc-experience">BV Từ Dũ - 15 năm kinh nghiệm</div>
+                                <div class="doc-desc">Chuyên về sản khoa nguy cơ cao và phẫu thuật nội soi phụ khoa. Từng đạt nhiều giải thưởng y khoa.</div>
+                                <div class="doc-rating">
+                                    ★★★★★ <span>4.8</span> <small>(512 đánh giá)</small>
+                                </div>
+                                <div class="doc-footer-info">
+                                    <div class="doc-footer-col">
+                                        <div class="doc-footer-label">Phí khám từ</div>
+                                        <div class="doc-footer-value text-blue">250.000đ</div>
+                                    </div>
+                                    <div class="doc-footer-col text-end">
+                                        <div class="doc-footer-label">Lịch trống</div>
+                                        <div class="doc-footer-value text-dark">Thứ Sáu</div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn-book">📅 Đặt lịch khám</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bác sĩ 3 -->
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="doc-card">
+                            <div class="doc-img-wrap">
+                                <span class="doc-badge badge-teal">Còn lịch hôm nay</span>
+                                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=80" alt="Bác sĩ">
+                            </div>
+                            <div class="doc-info">
+                                <div class="doc-name">ThS. BS. Lê Quang Hùng</div>
+                                <div class="doc-specialty">Nhi khoa</div>
+                                <div class="doc-experience">BV Nhi Đồng 1 - 12 năm kinh nghiệm</div>
+                                <div class="doc-desc">Bác sĩ nhi khoa giàu kinh nghiệm, chuyên điều trị các bệnh hô hấp và tiêu hóa ở trẻ em.</div>
+                                <div class="doc-rating">
+                                    ★★★★★ <span>4.9</span> <small>(287 đánh giá)</small>
+                                </div>
+                                <div class="doc-footer-info">
+                                    <div class="doc-footer-col">
+                                        <div class="doc-footer-label">Phí khám từ</div>
+                                        <div class="doc-footer-value text-blue">200.000đ</div>
+                                    </div>
+                                    <div class="doc-footer-col text-end">
+                                        <div class="doc-footer-label">Lịch trống</div>
+                                        <div class="doc-footer-value text-teal">Hôm nay</div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn-book">📅 Đặt lịch khám</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bác sĩ 4 -->
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="doc-card">
+                            <div class="doc-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=80" alt="Bác sĩ">
+                            </div>
+                            <div class="doc-info">
+                                <div class="doc-name">BS. CKI. Phạm Thu Hương</div>
+                                <div class="doc-specialty">Da liễu</div>
+                                <div class="doc-experience">BV Da liễu TW - 10 năm kinh nghiệm</div>
+                                <div class="doc-desc">Chuyên gia da liễu thẩm mỹ, điều trị mụn, nám và các bệnh da mãn tính. Từng tư vấn cho nhiều ngôi sao.</div>
+                                <div class="doc-rating">
+                                    ★★★★★ <span>4.7</span> <small>(196 đánh giá)</small>
+                                </div>
+                                <div class="doc-footer-info">
+                                    <div class="doc-footer-col">
+                                        <div class="doc-footer-label">Phí khám từ</div>
+                                        <div class="doc-footer-value text-blue">220.000đ</div>
+                                    </div>
+                                    <div class="doc-footer-col text-end">
+                                        <div class="doc-footer-label">Lịch trống</div>
+                                        <div class="doc-footer-value text-dark">Thứ Bảy</div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn-book">📅 Đặt lịch khám</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nút XEM THÊM -->
+                <a href="#" class="btn-load-more">Tải thêm 20 bác sĩ ⟳</a>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="cholibi-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="footer-logo">
+                        <span>+</span> Cholibi Clinic
+                    </div>
+                    <p>Nền tảng đặt lịch khám trực tuyến hàng đầu Việt Nam. Kết nối bệnh nhân với bác sĩ tin cậy.</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="footer-heading">Dịch vụ</h5>
+                    <ul class="footer-list">
+                        <li><a href="#">Đặt lịch khám</a></li>
+                        <li><a href="#">Khám từ xa</a></li>
+                        <li><a href="#">Xét nghiệm</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="footer-heading">Hỗ trợ</h5>
+                    <ul class="footer-list">
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="footer-heading">Công ty</h5>
+                    <ul class="footer-list">
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2026 Cholibi Clinic.</div>
+                <div>
+                    <a href="#" class="text-secondary text-decoration-none me-3">Chính sách bảo mật</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script của Bootstrap -->
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+</body>
+</html>

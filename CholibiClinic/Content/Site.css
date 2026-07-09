@@ -1,0 +1,529 @@
+/* Cài đặt chung cơ bản */
+body {
+    font-family: Arial, Helvetica, sans-serif; /* Font cơ bản dễ nhìn */
+    background-color: #f8f9fa; /* Màu nền xám nhạt cho web */
+    margin: 0;
+    padding: 0;
+}
+
+/* --- HEADER & NAVBAR --- */
+.cholibi-header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Đổ bóng nhẹ cho sinh viên */
+}
+
+.cholibi-logo {
+    color: #0d6efd; /* Màu xanh nước biển */
+    font-weight: bold;
+    font-size: 24px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.cholibi-logo:hover {
+    text-decoration: none;
+}
+
+.nav-link {
+    color: #333333 !important;
+    font-weight: 500;
+    margin: 0 10px;
+}
+
+.nav-link:hover {
+    color: #0d6efd !important;
+}
+
+/* Nút bấm Đăng ký / Đăng nhập */
+.btn-login {
+    border: 1px solid #0d6efd;
+    color: #0d6efd;
+    background: transparent;
+    padding: 8px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.btn-login:hover {
+    background: #e9ecef;
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.btn-register {
+    background: #0d6efd;
+    color: #ffffff;
+    padding: 8px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #0d6efd;
+}
+.btn-register:hover {
+    background: #0b5ed7;
+    color: white;
+    text-decoration: none;
+}
+
+/* --- HERO SECTION (Banner chính) --- */
+.hero-section {
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Màu nền xanh gradient */
+    padding: 60px 0;
+    color: white;
+}
+
+.tag-badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero-title span {
+    color: #8be9fd; /* Xanh lơ nhạt */
+}
+
+.hero-desc {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #e0e0e0;
+}
+
+.btn-book-now {
+    background-color: white;
+    color: #0d6efd;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-book-now:hover {
+    background-color: #f8f9fa;
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.hero-img-box {
+    text-align: center;
+}
+
+.hero-img {
+    max-width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.feature-mini-cards {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.mini-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    width: 30%;
+}
+
+/* --- CHUYÊN KHOA SECTION --- */
+.specialty-section {
+    padding: 60px 0;
+    background-color: white;
+}
+
+.section-subtitle {
+    color: #0d6efd;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 40px;
+}
+
+.specialty-card {
+    border-radius: 10px;
+    padding: 20px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    color: #333;
+    transition: 0.3s;
+    border: 1px solid #eee;
+    height: 100%;
+}
+
+.specialty-card:hover {
+    transform: translateY(-5px); /* Hiệu ứng sinh viên hay dùng */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-decoration: none;
+    color: #333;
+}
+
+.specialty-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.specialty-name {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.specialty-count {
+    font-size: 12px;
+    color: #777;
+}
+
+/* Các màu nền cho thẻ chuyên khoa */
+.bg-red { background-color: #fff0f0; border-color: #ffd0d0; }
+.bg-yellow { background-color: #fffde6; border-color: #ffe69c; }
+.bg-green { background-color: #f0fdf4; border-color: #bbf7d0; }
+.bg-pink { background-color: #fdf2f8; border-color: #fbcfe8; }
+.bg-blue { background-color: #eff6ff; border-color: #bfdbfe; }
+.bg-purple { background-color: #f5f3ff; border-color: #ddd6fe; }
+.bg-orange { background-color: #fff7ed; border-color: #fed7aa; }
+
+/* --- QUY TRÌNH SECTION --- */
+.process-section {
+    padding: 60px 0;
+    background-color: #f0f8ff; /* AliceBlue */
+    text-align: center;
+}
+
+.process-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    height: 100%;
+}
+
+.process-step {
+    background-color: #0d6efd;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.process-icon {
+    font-size: 24px;
+    color: #0d6efd;
+    margin-bottom: 10px;
+}
+
+.process-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.process-desc {
+    font-size: 13px;
+    color: #666;
+}
+
+/* --- FOOTER --- */
+.cholibi-footer {
+    background-color: #111c2a;
+    color: #a0aabf;
+    padding: 50px 0 20px 0;
+}
+
+.footer-logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer-logo span {
+    color: #0d6efd;
+}
+
+.footer-heading {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-list li {
+    margin-bottom: 10px;
+}
+
+.footer-list a {
+    color: #a0aabf;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-list a:hover {
+    color: white;
+}
+
+.app-buttons img {
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #333;
+}
+
+.footer-bottom {
+    border-top: 1px solid #223042;
+    margin-top: 40px;
+    padding-top: 20px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Responsive: Ẩn bớt margin-top ở thiết bị nhỏ */
+@media (max-width: 768px) {
+    .process-card {
+        margin-bottom: 20px;
+    }
+    .hero-img-box {
+        margin-top: 30px;
+    }
+}
+
+/* --- DANH SÁCH BÁC SĨ (Doctor Card) --- */
+.doc-page-header {
+    padding: 30px 0;
+    background-color: #f8f9fa;
+}
+
+.doc-breadcrumb {
+    font-size: 13px;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+.doc-breadcrumb a {
+    color: #0d6efd;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.doc-page-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #111c2a;
+    margin-bottom: 5px;
+}
+
+.doc-page-count {
+    color: #6c757d;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.doc-card {
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.doc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.doc-img-wrap {
+    position: relative;
+    height: 220px;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+.doc-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.doc-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+.badge-blue { background-color: #0d6efd; }
+.badge-teal { background-color: #20c997; }
+
+.doc-info {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.doc-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #111c2a;
+    margin-bottom: 5px;
+}
+
+.doc-specialty {
+    font-size: 13px;
+    color: #0d6efd;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.doc-experience {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 12px;
+}
+
+.doc-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+
+.doc-rating {
+    font-size: 13px;
+    color: #f39c12; /* Màu vàng cam cho sao */
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.doc-rating span {
+    color: #333;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.doc-rating small {
+    color: #888;
+    margin-left: 5px;
+    font-weight: normal;
+}
+
+.doc-footer-info {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.doc-footer-col {
+    text-align: left;
+}
+
+.doc-footer-label {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 2px;
+}
+
+.doc-footer-value {
+    font-size: 14px;
+    font-weight: bold;
+}
+.text-blue { color: #0d6efd; }
+.text-teal { color: #20c997; }
+.text-dark { color: #333; }
+
+.btn-book {
+    display: block;
+    width: 100%;
+    background-color: #0d6efd;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    transition: 0.2s;
+}
+.btn-book:hover {
+    background-color: #0b5ed7;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-load-more {
+    display: block;
+    width: 200px;
+    margin: 40px auto 0 auto;
+    background-color: white;
+    color: #0d6efd;
+    border: 1px solid #0d6efd;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.btn-load-more:hover {
+    background-color: #f8f9fa;
+    color: #0b5ed7;
+    text-decoration: none;
+}
