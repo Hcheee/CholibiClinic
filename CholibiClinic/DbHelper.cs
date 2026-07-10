@@ -136,7 +136,12 @@ namespace CholibiClinic
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    string query = "SELECT SpecialtyId, SpecialtyName FROM Specialties ORDER BY SpecialtyName ASC";
+                    // Dùng GROUP BY để lọc tên chuyên khoa trùng, lấy SpecialtyId nhỏ nhất
+                    string query = @"
+                        SELECT MIN(SpecialtyId) AS SpecialtyId, SpecialtyName
+                        FROM Specialties
+                        GROUP BY SpecialtyName
+                        ORDER BY SpecialtyName ASC";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
@@ -153,6 +158,34 @@ namespace CholibiClinic
                 return (DataTable)HttpContext.Current.Session["MockSpecialties"];
             }
             return dt;
+        }
+
+        // Chuẩn hóa SpecialtyId: trả về MIN(SpecialtyId) của cùng tên chuyên khoa
+        // Dùng để xử lý trường hợp DB có bản ghi trùng tên với ID khác nhau
+        public static int GetCanonicalSpecialtyId(int specialtyId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    string query = @"
+                        SELECT MIN(s2.SpecialtyId)
+                        FROM Specialties s1
+                        INNER JOIN Specialties s2 ON s1.SpecialtyName = s2.SpecialtyName
+                        WHERE s1.SpecialtyId = @SpecialtyId";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@SpecialtyId", specialtyId);
+                        conn.Open();
+                        object result = cmd.ExecuteScalar();
+                        return (result != null && result != DBNull.Value) ? Convert.ToInt32(result) : specialtyId;
+                    }
+                }
+            }
+            catch
+            {
+                return specialtyId;
+            }
         }
 
         // Lấy danh sách bác sĩ (có thể lọc theo SpecialtyId)
@@ -181,7 +214,14 @@ namespace CholibiClinic
                         LEFT JOIN Specialties s ON d.SpecialtyId = s.SpecialtyId";
                     if (specialtyId.HasValue && specialtyId.Value > 0)
                     {
-                        query += " WHERE d.SpecialtyId = @SpecialtyId";
+                        // Lọc theo tất cả SpecialtyId có cùng tên với specialtyId được truyền vào
+                        // (xử lý trường hợp DB có bản ghi chuyên khoa trùng tên với ID khác nhau)
+                        query += @" WHERE d.SpecialtyId IN (
+                                        SELECT SpecialtyId FROM Specialties
+                                        WHERE SpecialtyName = (
+                                            SELECT SpecialtyName FROM Specialties WHERE SpecialtyId = @SpecialtyId
+                                        )
+                                    )";
                     }
                     query += " ORDER BY d.DoctorName ASC";
 
