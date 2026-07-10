@@ -120,9 +120,11 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="BacSi.aspx" />
+    <Content Include="TinTuc.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="DangNhap.aspx" />
     <Content Include="DangKy.aspx" />
+    <Content Include="HoSoCaNhan.aspx" />
     <Content Include="DatLich.aspx" />
     <Content Include="EditDoctor.aspx" />
     <Content Include="LichKham.aspx" />
@@ -213,6 +215,13 @@
     <Compile Include="DangKy.aspx.designer.cs">
       <DependentUpon>DangKy.aspx</DependentUpon>
     </Compile>
+    <Compile Include="HoSoCaNhan.aspx.cs">
+      <DependentUpon>HoSoCaNhan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HoSoCaNhan.aspx.designer.cs">
+      <DependentUpon>HoSoCaNhan.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DatLich.aspx.cs">
       <DependentUpon>DatLich.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -255,6 +264,13 @@
     </Compile>
     <Compile Include="BacSi.aspx.designer.cs">
       <DependentUpon>BacSi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TinTuc.aspx.cs">
+      <DependentUpon>TinTuc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TinTuc.aspx.designer.cs">
+      <DependentUpon>TinTuc.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

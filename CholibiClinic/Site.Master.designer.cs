@@ -42,13 +42,13 @@ namespace CholibiClinic
         protected global::System.Web.UI.WebControls.PlaceHolder plhLoggedIn;
 
         /// <summary>
-        /// lblUserFullName control.
+        /// lnkUserFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserFullName;
+        protected global::System.Web.UI.WebControls.HyperLink lnkUserFullName;
 
         /// <summary>
         /// lnkLogout control.

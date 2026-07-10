@@ -153,14 +153,25 @@ ORDER BY d.DoctorId";
 
         protected string GetBadgeClass(object specialtyIdObj)
         {
-            if (specialtyIdObj == null || specialtyIdObj == DBNull.Value)
-                return "badge-blue";
-
+            if (specialtyIdObj == null || specialtyIdObj == DBNull.Value) return "badge-blue";
             int id = Convert.ToInt32(specialtyIdObj);
+            return (id % 2 == 0) ? "badge-blue" : "badge-teal";
+        }
 
-            return id % 2 == 0
-                ? "badge-blue"
-                : "badge-teal";
+        protected string GetDoctorImage(object doctorIdObj)
+        {
+            string[] doctorImages = new string[]
+            {
+                "https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=300",
+                "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=300",
+                "https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=300",
+                "https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg?auto=compress&cs=tinysrgb&w=300",
+                "https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300",
+                "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=300"
+            };
+            if (doctorIdObj == null || doctorIdObj == DBNull.Value) return doctorImages[0];
+            int id = Convert.ToInt32(doctorIdObj);
+            return doctorImages[id % doctorImages.Length];
         }
     }
 }

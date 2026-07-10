@@ -13,7 +13,7 @@
                     <a href="~/DatLich" runat="server" class="btn-book-now">📅 Đặt lịch khám ngay</a>
                 </div>
                 <div class="col-md-5 hero-img-box">
-                    <img src="https://images.unsplash.com/photo-1576091160550-2173ff9e5eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bác sĩ" class="hero-img" />
+                    <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bác sĩ" class="hero-img" />
                     <div class="feature-mini-cards">
                         <div class="mini-card">🔒<br />Bảo mật thông tin</div>
                         <div class="mini-card">⚡<br />Xác nhận tức thì</div>

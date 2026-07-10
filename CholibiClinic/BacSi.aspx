@@ -38,8 +38,7 @@
                                     <span class='doc-badge <%# GetBadgeClass(Eval("SpecialtyId")) %>'>
                                         <%# GetBadgeText(Eval("SpecialtyId")) %>
                                     </span>
-                                    <!-- Ảnh ngẫu nhiên cho đẹp -->
-                                    <img src='https://ui-avatars.com/api/?name=<%# Eval("DoctorName") %>&background=random&size=300' alt="Bác sĩ">
+                                    <img src='<%# GetDoctorImage(Eval("DoctorId")) %>' alt="Bác sĩ" style="object-fit: cover;">
                                 </div>
                                 <div class="doc-info">
                                     <div class="doc-name"><%# Eval("DoctorName") %></div>

@@ -122,9 +122,13 @@ body {
 }
 
 .hero-img {
-    max-width: 100%;
-    border-radius: 15px;
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    margin: 0 auto;
+    display: block;
 }
 
 .feature-mini-cards {
@@ -937,5 +941,14 @@ body {
     background-color: #f1f5f9;
     color: #334155;
     text-decoration: none;
+}
+
+.user-greeting a {
+    transition: all 0.2s ease;
+}
+
+.user-greeting a:hover {
+    color: #0b5ed7 !important;
+    text-decoration: underline !important;
 }
 
