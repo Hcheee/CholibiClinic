@@ -9,9 +9,9 @@ namespace CholibiClinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Chưa đăng nhập
             if (Session["UserId"] == null)
             {
-                // Chưa đăng nhập thì chuyển sang đăng nhập
                 Response.Redirect("~/DangNhap?ReturnUrl=LichKham.aspx");
                 return;
             }
@@ -24,8 +24,35 @@ namespace CholibiClinic
 
         private void LoadAppointments()
         {
-            int userId = Convert.ToInt32(Session["UserId"]);
-            DataTable dt = DbHelper.GetAppointments(userId);
+            string role = Session["Role"]?.ToString() ?? "";
+            DataTable dt = null;
+
+            if (role == "Admin")
+            {
+                // Admin xem tất cả lịch khám
+                dt = DbHelper.GetAllAppointments();
+            }
+            else if (role == "Doctor")
+            {
+                // Doctor chỉ xem lịch của mình
+                string email = Session["Email"]?.ToString();
+
+                int doctorId = DbHelper.GetDoctorIdByEmail(email);
+
+                dt = DbHelper.GetAppointmentsByDoctor(doctorId);
+            }
+            else if (role == "Patient")
+            {
+                // Patient chỉ xem lịch của mình
+                int userId = Convert.ToInt32(Session["UserId"]);
+
+                dt = DbHelper.GetAppointments(userId);
+            }
+            else
+            {
+                Response.Redirect("~/");
+                return;
+            }
 
             if (dt == null || dt.Rows.Count == 0)
             {
@@ -43,61 +70,97 @@ namespace CholibiClinic
 
         protected void rptAppointments_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (e.CommandName == "CancelAppointment")
+            if (e.CommandName != "CancelAppointment")
+                return;
+
+            string role = Session["Role"]?.ToString() ?? "";
+
+            // Doctor không được hủy lịch
+            if (role == "Doctor")
             {
-                int apptId = Convert.ToInt32(e.CommandArgument);
-                bool success = DbHelper.CancelAppointment(apptId);
-                
-                if (success)
-                {
-                    // Reload
-                    LoadAppointments();
-                }
-                else
-                {
-                    // Hiển thị lỗi nếu cần (có thể dùng ScriptManager để alert)
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Không thể hủy lịch khám này. Vui lòng liên hệ hỗ trợ!');", true);
-                }
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "alert",
+                    "alert('Bác sĩ không có quyền hủy lịch khám.');",
+                    true);
+
+                return;
+            }
+
+            int apptId = Convert.ToInt32(e.CommandArgument);
+
+            bool success = DbHelper.CancelAppointment(apptId);
+
+            if (success)
+            {
+                LoadAppointments();
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "alert",
+                    "alert('Không thể hủy lịch khám. Vui lòng thử lại!');",
+                    true);
             }
         }
 
-        // Định dạng màu viền cho thẻ lịch hẹn theo trạng thái
+        // Màu viền theo trạng thái
         protected string GetStatusClass(object statusObj)
         {
             if (statusObj == null) return "border-pending";
-            string status = statusObj.ToString();
-            switch (status)
+
+            switch (statusObj.ToString())
             {
-                case "Chờ khám": return "border-pending";
-                case "Đã khám": return "border-completed";
-                case "Đã hủy": return "border-cancelled";
-                default: return "border-pending";
+                case "Chờ khám":
+                    return "border-pending";
+
+                case "Đã khám":
+                    return "border-completed";
+
+                case "Đã hủy":
+                    return "border-cancelled";
+
+                default:
+                    return "border-pending";
             }
         }
 
-        // Định dạng class cho badge trạng thái
+        // Badge trạng thái
         protected string GetBadgeStatusClass(object statusObj)
         {
             if (statusObj == null) return "status-pending";
-            string status = statusObj.ToString();
-            switch (status)
+
+            switch (statusObj.ToString())
             {
-                case "Chờ khám": return "status-pending";
-                case "Đã khám": return "status-completed";
-                case "Đã hủy": return "status-cancelled";
-                default: return "status-pending";
+                case "Chờ khám":
+                    return "status-pending";
+
+                case "Đã khám":
+                    return "status-completed";
+
+                case "Đã hủy":
+                    return "status-cancelled";
+
+                default:
+                    return "status-pending";
             }
         }
 
-        // Định dạng hiển thị giờ (TimeSpan)
+        // Định dạng giờ
         protected string FormatTime(object timeObj)
         {
-            if (timeObj == null) return "08:00";
+            if (timeObj == null)
+                return "08:00";
+
             if (timeObj is TimeSpan)
             {
                 TimeSpan ts = (TimeSpan)timeObj;
                 return ts.ToString(@"hh\:mm");
             }
+
             return timeObj.ToString();
         }
     }

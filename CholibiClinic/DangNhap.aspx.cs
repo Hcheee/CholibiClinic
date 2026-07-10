@@ -1,6 +1,5 @@
 using System;
 using System.Data;
-using System.Web;
 using System.Web.UI;
 
 namespace CholibiClinic
@@ -32,20 +31,30 @@ namespace CholibiClinic
             }
 
             DataTable dtUser = DbHelper.LoginUser(email, password);
+
             if (dtUser != null && dtUser.Rows.Count > 0)
             {
                 DataRow userRow = dtUser.Rows[0];
-                
-                // Lưu session đăng nhập
+
+                // Lưu Session
                 Session["UserId"] = userRow["UserId"];
                 Session["FullName"] = userRow["FullName"];
                 Session["Email"] = userRow["Email"];
                 Session["Role"] = userRow["Role"];
 
-                // Nếu có tham số quay lại trang đặt lịch (ReturnUrl)
-                if (Request.QueryString["ReturnUrl"] != null)
+                string role = userRow["Role"].ToString();
+
+                if (role == "Admin")
                 {
-                    Response.Redirect(Request.QueryString["ReturnUrl"]);
+                    Response.Redirect("~/");
+                }
+                else if (role == "Doctor")
+                {
+                    Response.Redirect("~/BacSi.aspx");
+                }
+                else if (role == "Patient")
+                {
+                    Response.Redirect("~/");
                 }
                 else
                 {

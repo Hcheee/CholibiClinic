@@ -9,24 +9,35 @@ namespace CholibiClinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Chưa đăng nhập
             if (Session["UserId"] == null)
             {
-                // Chưa đăng nhập thì bắt buộc chuyển về Đăng nhập và lưu URL quay lại
                 Response.Redirect("~/DangNhap?ReturnUrl=DatLich.aspx");
+                return;
+            }
+
+            // Chỉ Patient mới được đặt lịch
+            string role = Session["Role"]?.ToString();
+
+            if (role != "Patient")
+            {
+                Response.Redirect("~/");
                 return;
             }
 
             if (!IsPostBack)
             {
                 lblPatientName.Text = Session["FullName"]?.ToString() ?? "Khách hàng";
-                
-                // Mặc định ngày khám là ngày mai
+
                 txtDate.Text = DateTime.Today.AddDays(1).ToString("yyyy-MM-dd");
 
                 LoadSpecialties();
                 LoadDoctors();
             }
         }
+
+
+
 
         private void LoadSpecialties()
         {

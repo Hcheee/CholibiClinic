@@ -15,7 +15,22 @@
             </div>
 
             <div class="row g-4">
-                <asp:Repeater ID="rptDoctors" runat="server">
+                <asp:Button
+    ID="btnAddDoctor"
+    runat="server"
+    Text="+ Thêm bác sĩ"
+    CssClass="btn btn-success mb-3"
+    Visible="false"
+    OnClick="btnAddDoctor_Click" />
+                <asp:Label ID="lblMessage"
+    runat="server"
+    Visible="false"
+    CssClass="alert alert-warning mb-3">
+</asp:Label>
+                <asp:Repeater
+    ID="rptDoctors"
+    runat="server"
+    OnItemCommand="rptDoctors_ItemCommand">
                     <ItemTemplate>
                         <div class="col-lg-3 col-md-6 col-12">
                             <div class="doc-card">
@@ -48,6 +63,30 @@
                                     </div>
                                     <a href="#" class="btn-book">📅 Đặt lịch khám</a>
                                 </div>
+                                <asp:PlaceHolder
+    runat="server"
+    Visible='<%# Session["Role"] != null && Session["Role"].ToString() == "Admin" %>'>
+
+    <br /><br />
+
+    <asp:LinkButton
+        ID="btnEdit"
+        runat="server"
+        Text="✏ Sửa"
+        CssClass="btn btn-warning btn-sm"
+        CommandName="EditDoctor"
+        CommandArgument='<%# Eval("DoctorId") %>' />
+
+    <asp:LinkButton
+        ID="btnDelete"
+        runat="server"
+        Text="🗑 Xóa"
+        CssClass="btn btn-danger btn-sm"
+        CommandName="DeleteDoctor"
+        CommandArgument='<%# Eval("DoctorId") %>'
+        OnClientClick="return confirm('Bạn có chắc muốn xóa bác sĩ này?');" />
+
+</asp:PlaceHolder>
                             </div>
                         </div>
                     </ItemTemplate>

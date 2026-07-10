@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AddDoctor.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -123,6 +124,7 @@
     <Content Include="DangNhap.aspx" />
     <Content Include="DangKy.aspx" />
     <Content Include="DatLich.aspx" />
+    <Content Include="EditDoctor.aspx" />
     <Content Include="LichKham.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -188,6 +190,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddDoctor.aspx.cs">
+      <DependentUpon>AddDoctor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddDoctor.aspx.designer.cs">
+      <DependentUpon>AddDoctor.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="DbHelper.cs" />
     <Compile Include="DangNhap.aspx.cs">
@@ -210,6 +219,13 @@
     </Compile>
     <Compile Include="DatLich.aspx.designer.cs">
       <DependentUpon>DatLich.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditDoctor.aspx.cs">
+      <DependentUpon>EditDoctor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditDoctor.aspx.designer.cs">
+      <DependentUpon>EditDoctor.aspx</DependentUpon>
     </Compile>
     <Compile Include="LichKham.aspx.cs">
       <DependentUpon>LichKham.aspx</DependentUpon>

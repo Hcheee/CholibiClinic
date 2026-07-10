@@ -96,7 +96,7 @@ namespace CholibiClinic
                 dt.Columns.Add("Role", typeof(string));
 
                 dt.Rows.Add(1, "Administrator", "admin@gmail.com", "123456", "0123456789", "Nam", new DateTime(2003, 1, 1), "Hà Nội", "Admin");
-                dt.Rows.Add(2, "nhc", "abc@d.com", "12345", "0862897205", "Nữ", new DateTime(2005, 4, 12), "abcd", "user");
+
 
                 session["MockUsers"] = dt;
             }
@@ -358,7 +358,7 @@ namespace CholibiClinic
                 var rows = mockDt.AsEnumerable()
                     .Where(r => r.Field<string>("Email").Equals(email, StringComparison.OrdinalIgnoreCase)
                              && r.Field<string>("Password") == password);
-                
+
                 if (rows.Any())
                 {
                     return rows.CopyToDataTable();
@@ -449,5 +449,240 @@ namespace CholibiClinic
                 return RegisterUser(fullName, email, password, phone, gender, birthDate, address);
             }
         }
+        public static int GetDoctorIdByEmail(string email)
+        {
+            if (ShouldUseMock())
+            {
+                DataTable dt = (DataTable)HttpContext.Current.Session["MockDoctors"];
+
+                var row = dt.AsEnumerable()
+                    .FirstOrDefault(r => r.Field<string>("Email")
+                    .Equals(email, StringComparison.OrdinalIgnoreCase));
+
+                if (row != null)
+                    return row.Field<int>("DoctorId");
+
+                return 0;
+            }
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string sql = "SELECT DoctorId FROM Doctors WHERE Email=@Email";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Email", email);
+
+                conn.Open();
+
+                object obj = cmd.ExecuteScalar();
+
+                if (obj == null)
+                    return 0;
+
+                return Convert.ToInt32(obj);
+            }
+        }
+
+        public static DataTable GetAppointmentsByDoctor(int doctorId)
+        {
+            if (ShouldUseMock())
+            {
+                DataTable dt = (DataTable)HttpContext.Current.Session["MockAppointments"];
+
+                DataView dv = new DataView(dt);
+                dv.RowFilter = "DoctorId = " + doctorId;
+                dv.Sort = "AppointmentDate DESC, AppointmentTime DESC";
+
+                return dv.ToTable();
+            }
+
+            DataTable table = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string sql = @"
+        SELECT a.AppointmentId,
+               a.UserId,
+               u.FullName,
+               d.DoctorName,
+               s.SpecialtyName,
+               a.AppointmentDate,
+               a.AppointmentTime,
+               a.Status
+        FROM Appointments a
+        INNER JOIN Users u ON a.UserId=u.UserId
+        INNER JOIN Doctors d ON a.DoctorId=d.DoctorId
+        LEFT JOIN Specialties s ON d.SpecialtyId=s.SpecialtyId
+        WHERE a.DoctorId=@DoctorId
+        ORDER BY AppointmentDate DESC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@DoctorId", doctorId);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                da.Fill(table);
+            }
+
+            return table;
+        }
+        public static DataTable GetAllAppointments()
+        {
+            if (ShouldUseMock())
+            {
+                return (DataTable)HttpContext.Current.Session["MockAppointments"];
+            }
+
+            DataTable table = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string sql = @"
+        SELECT a.AppointmentId,
+               u.FullName,
+               d.DoctorName,
+               s.SpecialtyName,
+               a.AppointmentDate,
+               a.AppointmentTime,
+               a.Status
+        FROM Appointments a
+        INNER JOIN Users u ON a.UserId=u.UserId
+        INNER JOIN Doctors d ON a.DoctorId=d.DoctorId
+        LEFT JOIN Specialties s ON d.SpecialtyId=s.SpecialtyId
+        ORDER BY AppointmentDate DESC";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+
+                da.Fill(table);
+            }
+
+            return table;
+        }
+
+        public static bool DeleteDoctor(int doctorId)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["ClinicDB"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                // Kiểm tra bác sĩ có lịch khám hay không
+                string checkSql = "SELECT COUNT(*) FROM Appointments WHERE DoctorId = @DoctorId";
+
+                using (SqlCommand checkCmd = new SqlCommand(checkSql, conn))
+                {
+                    checkCmd.Parameters.AddWithValue("@DoctorId", doctorId);
+
+                    int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                    if (count > 0)
+                    {
+                        // Có lịch khám -> không cho xóa
+                        return false;
+                    }
+                }
+
+                // Không có lịch khám thì xóa
+                string deleteSql = "DELETE FROM Doctors WHERE DoctorId = @DoctorId";
+
+                using (SqlCommand deleteCmd = new SqlCommand(deleteSql, conn))
+                {
+                    deleteCmd.Parameters.AddWithValue("@DoctorId", doctorId);
+
+                    return deleteCmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+        public static bool AddDoctor(string doctorName,
+                             string phone,
+                             string email,
+                             int specialtyId)
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string sql = @"
+        INSERT INTO Doctors
+        (
+            DoctorName,
+            Phone,
+            Email,
+            SpecialtyId
+        )
+        VALUES
+        (
+            @DoctorName,
+            @Phone,
+            @Email,
+            @SpecialtyId
+        )";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@DoctorName", doctorName);
+                cmd.Parameters.AddWithValue("@Phone", phone);
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@SpecialtyId", specialtyId);
+
+                conn.Open();
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+        public static bool UpdateDoctor(int doctorId,
+                                string doctorName,
+                                string phone,
+                                string email,
+                                int specialtyId)
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string sql = @"
+        UPDATE Doctors
+        SET DoctorName=@DoctorName,
+            Phone=@Phone,
+            Email=@Email,
+            SpecialtyId=@SpecialtyId
+        WHERE DoctorId=@DoctorId";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@DoctorId", doctorId);
+                cmd.Parameters.AddWithValue("@DoctorName", doctorName);
+                cmd.Parameters.AddWithValue("@Phone", phone);
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@SpecialtyId", specialtyId);
+
+                conn.Open();
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+        public static DataTable GetDoctorById(int doctorId)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string sql = @"
+        SELECT *
+        FROM Doctors
+        WHERE DoctorId=@DoctorId";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@DoctorId", doctorId);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                da.Fill(dt);
+            }
+
+            return dt;
+        }
     }
 }
+
+
+

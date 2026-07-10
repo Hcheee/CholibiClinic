@@ -1,9 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace CholibiClinic
 {
@@ -17,12 +13,20 @@ namespace CholibiClinic
                 {
                     plhAnonymous.Visible = false;
                     plhLoggedIn.Visible = true;
-                    lblUserFullName.Text = Session["FullName"]?.ToString() ?? "Bệnh nhân";
+
+                    lblUserFullName.Text = Session["FullName"]?.ToString() ?? "";
+
+                    string role = Session["Role"]?.ToString() ?? "";
+
+                    // Chỉ bệnh nhân mới thấy menu Đặt lịch
+                    phPatientMenu.Visible = (role == "Patient");
                 }
                 else
                 {
                     plhAnonymous.Visible = true;
                     plhLoggedIn.Visible = false;
+
+                    phPatientMenu.Visible = false;
                 }
             }
         }
