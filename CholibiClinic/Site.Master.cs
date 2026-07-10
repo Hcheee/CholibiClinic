@@ -14,7 +14,7 @@ namespace CholibiClinic
                     plhAnonymous.Visible = false;
                     plhLoggedIn.Visible = true;
 
-                    lblUserFullName.Text = Session["FullName"]?.ToString() ?? "";
+                    lnkUserFullName.Text = Session["FullName"]?.ToString() ?? "";
 
                     string role = Session["Role"]?.ToString() ?? "";
 

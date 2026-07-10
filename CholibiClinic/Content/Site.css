@@ -939,3 +939,12 @@ body {
     text-decoration: none;
 }
 
+.user-greeting a {
+    transition: all 0.2s ease;
+}
+
+.user-greeting a:hover {
+    color: #0b5ed7 !important;
+    text-decoration: underline !important;
+}
+

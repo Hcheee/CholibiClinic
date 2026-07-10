@@ -443,7 +443,7 @@ namespace CholibiClinic
                 if (exists) return false;
 
                 int newId = mockDt.AsEnumerable().Max(r => r.Field<int>("UserId")) + 1;
-                mockDt.Rows.Add(newId, fullName, email, password, phone, gender, birthDate, address, "user");
+                mockDt.Rows.Add(newId, fullName, email, password, phone, gender, birthDate, address, "Patient");
                 HttpContext.Current.Session["MockUsers"] = mockDt;
                 return true;
             }
@@ -464,7 +464,7 @@ namespace CholibiClinic
 
                     string query = @"
                         INSERT INTO Users (FullName, Email, Password, Phone, Gender, BirthDate, Address, Role)
-                        VALUES (@FullName, @Email, @Password, @Phone, @Gender, @BirthDate, @Address, 'user')";
+                        VALUES (@FullName, @Email, @Password, @Phone, @Gender, @BirthDate, @Address, 'Patient')";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -720,6 +720,133 @@ namespace CholibiClinic
             }
 
             return dt;
+        }
+
+        public static DataTable GetUserById(int userId)
+        {
+            if (ShouldUseMock())
+            {
+                DataTable mockDt = (DataTable)HttpContext.Current.Session["MockUsers"];
+                var rows = mockDt.AsEnumerable().Where(r => r.Field<int>("UserId") == userId);
+                if (rows.Any())
+                {
+                    return rows.CopyToDataTable();
+                }
+                return null;
+            }
+
+            DataTable dt = new DataTable();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    string query = "SELECT UserId, FullName, Email, Password, Phone, Gender, BirthDate, Address, Role FROM Users WHERE UserId = @UserId";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                }
+                if (dt.Rows.Count > 0) return dt;
+            }
+            catch (Exception)
+            {
+                HttpContext.Current.Session["UseMockData"] = true;
+                InitMockData();
+                return GetUserById(userId);
+            }
+            return null;
+        }
+
+        public static bool UpdateUserProfile(int userId, string fullName, string email, string phone, string gender, DateTime birthDate, string address, string newPassword)
+        {
+            if (ShouldUseMock())
+            {
+                DataTable mockDt = (DataTable)HttpContext.Current.Session["MockUsers"];
+                bool exists = mockDt.AsEnumerable().Any(r => r.Field<int>("UserId") != userId && r.Field<string>("Email").Equals(email, StringComparison.OrdinalIgnoreCase));
+                if (exists) return false;
+
+                var row = mockDt.AsEnumerable().FirstOrDefault(r => r.Field<int>("UserId") == userId);
+                if (row != null)
+                {
+                    row["FullName"] = fullName;
+                    row["Email"] = email;
+                    row["Phone"] = phone;
+                    row["Gender"] = gender;
+                    row["BirthDate"] = birthDate;
+                    row["Address"] = address;
+                    if (!string.IsNullOrEmpty(newPassword))
+                    {
+                        row["Password"] = newPassword;
+                    }
+                    HttpContext.Current.Session["MockUsers"] = mockDt;
+                    return true;
+                }
+                return false;
+            }
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    string checkQuery = "SELECT COUNT(*) FROM Users WHERE Email = @Email AND UserId != @UserId";
+                    using (SqlCommand cmdCheck = new SqlCommand(checkQuery, conn))
+                    {
+                        cmdCheck.Parameters.AddWithValue("@Email", email.Trim());
+                        cmdCheck.Parameters.AddWithValue("@UserId", userId);
+                        conn.Open();
+                        int count = (int)cmdCheck.ExecuteScalar();
+                        if (count > 0) return false;
+                        conn.Close();
+                    }
+
+                    string query;
+                    if (!string.IsNullOrEmpty(newPassword))
+                    {
+                        query = @"
+                            UPDATE Users 
+                            SET FullName = @FullName, Email = @Email, Phone = @Phone, Gender = @Gender, 
+                                BirthDate = @BirthDate, Address = @Address, Password = @Password
+                            WHERE UserId = @UserId";
+                    }
+                    else
+                    {
+                        query = @"
+                            UPDATE Users 
+                            SET FullName = @FullName, Email = @Email, Phone = @Phone, Gender = @Gender, 
+                                BirthDate = @BirthDate, Address = @Address
+                            WHERE UserId = @UserId";
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        cmd.Parameters.AddWithValue("@FullName", fullName.Trim());
+                        cmd.Parameters.AddWithValue("@Email", email.Trim());
+                        cmd.Parameters.AddWithValue("@Phone", phone.Trim());
+                        cmd.Parameters.AddWithValue("@Gender", gender);
+                        cmd.Parameters.AddWithValue("@BirthDate", birthDate.Date);
+                        cmd.Parameters.AddWithValue("@Address", address.Trim());
+                        if (!string.IsNullOrEmpty(newPassword))
+                        {
+                            cmd.Parameters.AddWithValue("@Password", newPassword);
+                        }
+
+                        conn.Open();
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows > 0;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                HttpContext.Current.Session["UseMockData"] = true;
+                InitMockData();
+                return UpdateUserProfile(userId, fullName, email, phone, gender, birthDate, address, newPassword);
+            }
         }
     }
 }

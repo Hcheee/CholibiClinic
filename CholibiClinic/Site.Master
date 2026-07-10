@@ -100,7 +100,7 @@
                         <span class="user-greeting me-3">
                             👋 Xin chào,
                             <strong class="text-primary">
-                                <asp:Label ID="lblUserFullName" runat="server"></asp:Label>
+                                <asp:HyperLink ID="lnkUserFullName" runat="server" NavigateUrl="~/HoSoCaNhan.aspx" CssClass="text-primary text-decoration-none"></asp:HyperLink>
                             </strong>
                         </span>
 
