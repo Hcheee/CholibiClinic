@@ -31,8 +31,41 @@ namespace CholibiClinic
 
                 txtDate.Text = DateTime.Today.AddDays(1).ToString("yyyy-MM-dd");
 
+                // Đọc tham số từ URL (khi bấm từ trang Bác sĩ)
+                int preSelectedSpecialtyId = 0;
+                int preSelectedDoctorId = 0;
+                int.TryParse(Request.QueryString["specialtyId"], out preSelectedSpecialtyId);
+                int.TryParse(Request.QueryString["doctorId"], out preSelectedDoctorId);
+
+                // Chuẩn hóa specialtyId về MIN của tên chuyên khoa (xử lý DB trùng)
+                if (preSelectedSpecialtyId > 0)
+                {
+                    preSelectedSpecialtyId = DbHelper.GetCanonicalSpecialtyId(preSelectedSpecialtyId);
+                }
+
                 LoadSpecialties();
-                LoadDoctors();
+
+                // Nếu có specialtyId từ URL, chọn sẵn chuyên khoa và load bác sĩ theo chuyên khoa đó
+                if (preSelectedSpecialtyId > 0)
+                {
+                    ListItem specItem = ddlSpecialty.Items.FindByValue(preSelectedSpecialtyId.ToString());
+                    if (specItem != null)
+                        ddlSpecialty.SelectedValue = preSelectedSpecialtyId.ToString();
+                    LoadDoctors(preSelectedSpecialtyId);
+                }
+                else
+                {
+                    LoadDoctors();
+                }
+
+                // Nếu có doctorId từ URL, chọn sẵn bác sĩ
+                if (preSelectedDoctorId > 0)
+                {
+                    ListItem docItem = ddlDoctor.Items.FindByValue(preSelectedDoctorId.ToString());
+                    if (docItem != null)
+                        ddlDoctor.SelectedValue = preSelectedDoctorId.ToString();
+                }
+
             }
         }
 

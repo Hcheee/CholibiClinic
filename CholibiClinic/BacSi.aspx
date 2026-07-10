@@ -61,7 +61,7 @@
                                             <div class="doc-footer-value text-teal">Hôm nay</div>
                                         </div>
                                     </div>
-                                    <a href="#" class="btn-book">📅 Đặt lịch khám</a>
+                                    <a href='DatLich.aspx?doctorId=<%# Eval("DoctorId") %>&specialtyId=<%# Eval("SpecialtyId") %>' class="btn-book">📅 Đặt lịch khám</a>
                                 </div>
                                 <asp:PlaceHolder
     runat="server"
